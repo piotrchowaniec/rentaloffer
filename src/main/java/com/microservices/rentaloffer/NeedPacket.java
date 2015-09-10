@@ -11,23 +11,27 @@ public class NeedPacket
 {
 
 	public final String NEED = "car_rental_offer";
-	private final List<Solution> solutions = new ArrayList<>();
-	private Long id;
+	private final List<Integer> solutions = new ArrayList<>();
+	private Long needId;
+	private Long userId;
+	private String status;
 
 	public NeedPacket()
 	{
 	}
 
-	public NeedPacket( long id )
+	public NeedPacket( long needId )
 	{
-		this.id = id;
+		this.needId = needId;
 	}
 
 	public String toJson()
 	{
 		Map<String, Object> message = new HashMap<>();
 		message.put( "json_class", NeedPacket.class.getName() );
-		message.put( "id", id );
+		message.put( "needId", needId );
+		message.put( "userId", userId);
+		message.put( "status", status);
 		message.put( "need", NEED );
 		message.put( "solutions", solutions );
 		return new Gson().toJson( message );
@@ -38,7 +42,7 @@ public class NeedPacket
 		return new Gson().fromJson( message, NeedPacket.class );
 	}
 
-	public void proposeSolution( Solution solution )
+	public void proposeSolution( Integer solution )
 	{
 		solutions.add( solution );
 	}
@@ -48,8 +52,39 @@ public class NeedPacket
 		return !solutions.isEmpty();
 	}
 
-	public void setId( Long id )
+	public void setNeedId( Long needId )
 	{
-		this.id = id;
+		this.needId = needId;
+	}
+
+	public void setUserId( Long userId )
+	{
+
+		this.userId = userId;
+	}
+
+	public void setStatus( String status )
+	{
+		this.status = status;
+	}
+
+	public List<Integer> getSolutions()
+	{
+		return solutions;
+	}
+
+	public Long getNeedId()
+	{
+		return needId;
+	}
+
+	public Long getUserId()
+	{
+		return userId;
+	}
+
+	public String getStatus()
+	{
+		return status;
 	}
 }
