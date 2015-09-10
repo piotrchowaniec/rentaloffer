@@ -27,7 +27,7 @@ public class NeedPacket
 	{
 		Map<String, Object> message = new HashMap<>();
 		message.put( "json_class", NeedPacket.class.getName() );
-		message.put( "need_id", id );
+		message.put( "id", id );
 		message.put( "need", NEED );
 		message.put( "solutions", solutions );
 		return new Gson().toJson( message );
