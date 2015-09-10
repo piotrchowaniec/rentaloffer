@@ -1,3 +1,7 @@
 target/
 *.iws
 .idea/
+.classpath
+.project
+.settings
+
