@@ -5,29 +5,49 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
-public class NeedPacket {
+public class NeedPacket
+{
 
-    public final String NEED = "car_rental_offer";
-    private final Map<String, Solution> solutions = new HashMap<>();
+	public final String NEED = "car_rental_offer";
+	private final Map<String, Solution> solutions = new HashMap<>();
+	private long id;
 
-    public String toJson() {
-        Map<String, Object> message = new HashMap<>();
-        message.put( "json_class", NeedPacket.class.getName() );
-        message.put( "need", NEED );
-        message.put( "solutions", solutions );
-        return new Gson().toJson( message );
-    }
+	public NeedPacket()
+	{
+	}
 
-    public static NeedPacket fromJson( String message ) {
-        return new Gson().fromJson( message, NeedPacket.class );
-    }
+	public NeedPacket( long id )
+	{
+		this.id = id;
+	}
 
-    public void proposeSolution( String providerId ) {
-        solutions.put( providerId, new Solution( "advice by " + providerId ) );
-    }
+	public String toJson()
+	{
+		Map<String, Object> message = new HashMap<>();
+		message.put( "json_class", NeedPacket.class.getName() );
+		message.put( "need_id", id );
+		message.put( "need", NEED );
+		message.put( "solutions", solutions );
+		return new Gson().toJson( message );
+	}
 
-    public boolean containsMySolultion( String providerId ) {
-        return solutions.containsKey( providerId );
-    }
+	public static NeedPacket fromJson( String message )
+	{
+		return new Gson().fromJson( message, NeedPacket.class );
+	}
 
+	public void proposeSolution( String providerId, Solution solution )
+	{
+		solutions.put( providerId, solution );
+	}
+
+	public boolean containsMySolultion( String providerId )
+	{
+		return solutions.containsKey( providerId );
+	}
+
+	public void setId( long id )
+	{
+		this.id = id;
+	}
 }

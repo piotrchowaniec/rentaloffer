@@ -24,7 +24,7 @@ public class SolutionProvider implements MessageHandler {
         logger.info( "message reveived: {}", message );
         NeedPacket needPacket = NeedPacket.fromJson( message );
         if ( !needPacket.containsMySolultion( providerId ) ) {
-            needPacket.proposeSolution( providerId );
+            needPacket.proposeSolution( providerId, new Solution( "advice by " + providerId ) );
             connections.publish( needPacket.toJson() );
         }
     }

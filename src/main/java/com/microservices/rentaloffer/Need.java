@@ -1,7 +1,5 @@
 package com.microservices.rentaloffer;
 
-import java.io.IOException;
-
 public class Need {
 
     public static void main(String[] args) {
@@ -12,11 +10,12 @@ public class Need {
     }
 
     public static void publish(String host, String busName) {
+        long id = 0;
         while(true)
         {
             try (Connections connection = new Connections( host, busName ))
             {
-                connection.publish( new NeedPacket().toJson() );
+                connection.publish( new NeedPacket( id++ ).toJson() );
                 Thread.sleep( 5000 );
             }
             catch( Exception e )
