@@ -1,6 +1,8 @@
 package com.microservices.rentaloffer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -9,8 +11,8 @@ public class NeedPacket
 {
 
 	public final String NEED = "car_rental_offer";
-	private final Map<String, Solution> solutions = new HashMap<>();
-	private long id;
+	private final List<Solution> solutions = new ArrayList<>();
+	private Long id;
 
 	public NeedPacket()
 	{
@@ -36,17 +38,17 @@ public class NeedPacket
 		return new Gson().fromJson( message, NeedPacket.class );
 	}
 
-	public void proposeSolution( String providerId, Solution solution )
+	public void proposeSolution( Solution solution )
 	{
-		solutions.put( providerId, solution );
+		solutions.add( solution );
 	}
 
-	public boolean containsMySolultion( String providerId )
+	public boolean hasSolution()
 	{
-		return solutions.containsKey( providerId );
+		return !solutions.isEmpty();
 	}
 
-	public void setId( long id )
+	public void setId( Long id )
 	{
 		this.id = id;
 	}

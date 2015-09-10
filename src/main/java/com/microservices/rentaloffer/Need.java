@@ -16,7 +16,7 @@ public class Need {
             try (Connections connection = new Connections( host, busName ))
             {
                 connection.publish( new NeedPacket( id++ ).toJson() );
-                Thread.sleep( 5000 );
+                Thread.sleep( 10000 );
             }
             catch( Exception e )
             {
